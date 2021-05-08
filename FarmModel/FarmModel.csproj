@@ -41,12 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animals\Animal.cs" />
+    <Compile Include="Animal\Actions\EggsCollectingAction.cs" />
+    <Compile Include="Animal\Actions\MilkingAction.cs" />
+    <Compile Include="Animal\Actions\RefreshableAction.cs" />
+    <Compile Include="Animal\Actions\SheeringAction.cs" />
+    <Compile Include="Animal\Animal.cs" />
     <Compile Include="Farm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Animals\Actions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
