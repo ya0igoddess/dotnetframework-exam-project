@@ -12,7 +12,7 @@ namespace FarmModel
         public int Age { get; private set; }
         public int Weight { get; private set; }
         public AnimalSex Sex { get; private set; }
-        public Animals AnimalKind { get; private set; }
+        public AnimalsKinds AnimalKind { get; protected set; }
         private double growCoefficient;
 
         protected Actions.MilkingAction milkingAction;

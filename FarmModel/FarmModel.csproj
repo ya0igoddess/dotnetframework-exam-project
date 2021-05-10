@@ -46,6 +46,10 @@
     <Compile Include="Animal\Actions\RefreshableAction.cs" />
     <Compile Include="Animal\Actions\SheeringAction.cs" />
     <Compile Include="Animal\Animal.cs" />
+    <Compile Include="Animal\Cow.cs" />
+    <Compile Include="Animal\Goat.cs" />
+    <Compile Include="Animal\Hen.cs" />
+    <Compile Include="Animal\Sheep.cs" />
     <Compile Include="Farm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

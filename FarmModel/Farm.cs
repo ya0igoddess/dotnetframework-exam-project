@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FarmModel
 {
-    public enum Animals { Cow, Hen, Sheep, Goat, All };
+    public enum AnimalsKinds { Cow, Hen, Sheep, Goat, All };
     public enum AnimalSex { Male, Female };
     public enum Action {Milking, Egg_Collecting, Sheering, Butching, Feed };
     public class Farm
