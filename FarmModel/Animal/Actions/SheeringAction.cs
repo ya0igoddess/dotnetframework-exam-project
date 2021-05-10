@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FarmModel.Actions
 {
-    abstract class SheeringAction : RefreshableAction
+    public abstract class SheeringAction : RefreshableAction
     {
         public void PerformSheering()
         {

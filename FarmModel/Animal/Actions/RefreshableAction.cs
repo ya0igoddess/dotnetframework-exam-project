@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FarmModel.Actions
 {   
-    abstract class RefreshableAction
+    public abstract class RefreshableAction
     {
         private bool isAbleToPerform = true;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FarmModel.Actions
 {
-    abstract class EggsCollectingAction : RefreshableAction
+    public abstract class EggsCollectingAction : RefreshableAction
     {
         public void PerformEggsCollectin()
         {

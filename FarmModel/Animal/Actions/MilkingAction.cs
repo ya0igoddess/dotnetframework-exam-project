@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FarmModel.Actions
 {
-    abstract class MilkingAction : RefreshableAction
+    public abstract class MilkingAction : RefreshableAction
     {
         public void PerformMilkin()
         {
