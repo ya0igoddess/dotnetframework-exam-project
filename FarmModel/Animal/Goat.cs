@@ -12,7 +12,15 @@ namespace FarmModel
         {
             this.AnimalKind = AnimalsKinds.Goat;
 
-            milkingAction = new Actions.MilkingWithGoatMilk();
+            if (sex == AnimalSex.Female)
+            {
+
+                milkingAction = new Actions.MilkingWithGoatMilk();
+            }
+            else
+            {
+                milkingAction = new Actions.MilkingNoMilk();
+            }
             eggsCollectingAction = new Actions.CollectingNoEggs();
             sheeringAction = new Actions.SheeringNoWool();
         }

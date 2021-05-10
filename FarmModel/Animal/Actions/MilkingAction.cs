@@ -30,7 +30,7 @@ namespace FarmModel.Actions
         }
     }
 
-    class MilkinNoMilk : MilkingAction
+    class MilkingNoMilk : MilkingAction
     {
         protected override void DoAction()
         {

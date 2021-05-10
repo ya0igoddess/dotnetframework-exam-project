@@ -12,7 +12,7 @@ namespace FarmModel
         {
 
             AnimalKind = AnimalsKinds.Sheep;
-            milkingAction = new Actions.MilkinNoMilk();
+            milkingAction = new Actions.MilkingNoMilk();
             eggsCollectingAction = new Actions.CollectingNoEggs();
             sheeringAction = new Actions.SheeringWithSheepWool();
 

@@ -12,8 +12,16 @@ namespace FarmModel
         {
             AnimalKind = AnimalsKinds.Hen;
 
-            milkingAction = new Actions.MilkinNoMilk();
-            eggsCollectingAction = new Actions.CollectingWithHenEggs();
+            milkingAction = new Actions.MilkingNoMilk();
+
+            if (AnimalSex.Female == sex)
+            {
+                eggsCollectingAction = new Actions.CollectingWithHenEggs();
+            }
+            else
+            {
+                eggsCollectingAction = new Actions.CollectingNoEggs();
+            }
             sheeringAction = new Actions.SheeringNoWool();
 
         }
