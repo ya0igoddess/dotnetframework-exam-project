@@ -22,9 +22,19 @@ namespace FarmModel
 
         public Animal(AnimalSex sex, int age, int weight)
         {
+            
             this.Sex = sex;
-            this.Age = age;
-            this.Weight = weight;
+
+            if (age >= 0)
+                this.Age = age;
+            else
+                throw new ArgumentException("Age can't be negative.");
+
+            if (weight > 0)
+                this.Weight = weight;
+            else
+                throw new ArgumentException("Weight must be positive.");
+
         }
 
         public void GrowUp()

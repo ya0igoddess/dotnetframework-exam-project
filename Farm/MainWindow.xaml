@@ -11,24 +11,24 @@
         <ListView x:Name="AnimalListView" HorizontalAlignment="Left" Height="313" Margin="10,33,0,0" VerticalAlignment="Top" Width="424">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Animal Kind"/>
+                    <GridViewColumn Header="Sex"/>
+                    <GridViewColumn Header="Age"/>
+                    <GridViewColumn Header="Weight"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox HorizontalAlignment="Left" Margin="454,84,0,0" VerticalAlignment="Top" Width="59"
-                  ItemsSource="{Binding Source={local:EnumBinding {x:Type localAnimal:AnimalSex}}}"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="518,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="643,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="ChooseSexLabel" Content="Sex" HorizontalAlignment="Left" Margin="454,58,0,0" VerticalAlignment="Top" Width="59"/>
-        <Label x:Name="ChooseWeightLabel" Content="Weight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="643,58,0,0" Width="120"/>
-        <Label x:Name="ChooseAgeLabel" Content="Age" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="518,58,0,0" Width="120"/>
-        <Label x:Name="AddNewAnimalHeaderLabel" Content="Animal Constructor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="454,35,0,0"/>
-        <Button x:Name="AddCustomAnimalButton" Content="Add new animal to the list" HorizontalAlignment="Left" Margin="518,112,0,0" VerticalAlignment="Top" Width="184"/>
-        <ToolBar HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="900">
-            <Button x:Name="OpenFileButton" Content="File"></Button>
-            <Button x:Name="SaveFileButton" Content="Save"></Button>
-            <Button x:Name="NewFileButton" Content="New"></Button>
-        </ToolBar>
+        <Grid Margin="454,35,29,287">
+            <ComboBox HorizontalAlignment="Left" Margin="0,49,0,0" VerticalAlignment="Top" Width="59"
+                ItemsSource="{Binding Source={local:EnumBinding {x:Type localAnimal:AnimalSex}}}" SelectedIndex="0"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="64,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="189,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="ChooseSexLabel" Content="Sex" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Width="59"/>
+            <Label x:Name="ChooseWeightLabel" Content="Weight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,23,0,0" Width="120"/>
+            <Label x:Name="ChooseAgeLabel" Content="Age" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="64,23,0,0" Width="120"/>
+            <Label x:Name="AddNewAnimalHeaderLabel" Content="Animal Constructor" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="AddCustomAnimalButton" Content="Add new animal to the list" HorizontalAlignment="Left" Margin="64,77,0,0" VerticalAlignment="Top" Width="184"/>
+        </Grid>
         <Grid x:Name="ExternalGridTableControlGrid" HorizontalAlignment="Left" Height="58" Margin="10,351,0,0" VerticalAlignment="Top" Width="424">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -40,11 +40,11 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="ChooseActionComboBox" VerticalAlignment="Center"
-                      ItemsSource="{Binding Source={local:EnumBinding {x:Type localAnimal:Action}}}" Margin="10,0" Grid.Column="1" Grid.Row="1"
+                      ItemsSource="{Binding Source={local:EnumBinding {x:Type localAnimal:Action}}}" Margin="10,0" Grid.Column="1" Grid.Row="1" SelectedIndex="0"
              />
             <ComboBox x:Name="ChooseAnimaInListComboBox" VerticalAlignment="Center" Height="auto"
-                  ItemsSource="{Binding Source={local:EnumBinding {x:Type localAnimal:Animals}}}" 
-                  Margin="10,0" Grid.Row="1"/>
+                  ItemsSource="{Binding Source={local:EnumBinding {x:Type localAnimal:AnimalsKinds}}}" 
+                  Margin="10,0" Grid.Row="1" SelectedIndex="0"/>
             <Label x:Name="ChooseAnimalLabel" Content="Choose animals:" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="25" Width="103"
                    Margin="0"/>
             <Label x:Name="ChooseActionLabel" Content="Choose action:" HorizontalAlignment="Center"  VerticalAlignment="Center"
@@ -52,6 +52,11 @@
             <Button x:Name="PerformActionButton" Content="Perform Action" Grid.Column="2" Margin="10,0" VerticalAlignment="Center" Height="22" Grid.Row="1"/>
 
         </Grid>
+        <Menu x:Name="menuBar" VerticalAlignment="Top">
+            <MenuItem Header="Open"/>
+            <MenuItem Header="Save"/>
+            <MenuItem Header="New"/>
+        </Menu>
 
     </Grid>
 </Window>
