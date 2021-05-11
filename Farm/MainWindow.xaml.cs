@@ -20,10 +20,46 @@ namespace FarmView
     /// </summary>
     public partial class MainWindow : Window
     {
+        FarmModel.Farm farm;
+
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            farm = new FarmModel.Farm();
+            AnimalListView.ItemsSource = farm.GetFilteredAnimals(FarmModel.AnimalsKinds.All);
+        }
+
+        private void ChooseAnimaInListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AnimalListView.ItemsSource = farm.GetFilteredAnimals(
+                                         (FarmModel.AnimalsKinds)AnimalViewCB.SelectedItem);
+        }
+
+        private void AddCustomAnimalButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                farm.addAnimal((FarmModel.AnimalsKinds)AnimalViewCB.SelectedItem,
+                               (FarmModel.AnimalSex)CustomAnimalSexCB.SelectedItem,
+                                int.Parse(CustomAnimalAgeCB.Text),
+                                int.Parse(CustomAnimalWeightTB.Text));
+            }
+            catch(Exception)
+            {
+                //TODO add ExceptionHandler
+            }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            farm = new FarmModel.Farm();
+        }
+
+        private void PerformActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            farm.PerformActionToAnimals((FarmModel.Action)ChooseActionComboBox.SelectedItem,
+                                        AnimalListView.SelectedItems);
         }
     }
 }

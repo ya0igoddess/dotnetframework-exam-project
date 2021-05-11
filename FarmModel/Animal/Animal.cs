@@ -51,6 +51,30 @@ namespace FarmModel
             //TODO return meat
         }
 
+        public void PerformAction(Action action)
+        {
+            switch (action)
+            {
+                case Action.Egg_Collecting:
+                    eggsCollectingAction.PerformAction();
+                    break;
+                case Action.Feed:
+                    GrowUp();
+                    break;
+                case Action.Milking:
+                    milkingAction.PerformAction();
+                    break;
+                case Action.Sheering:
+                    sheeringAction.PerformAction();
+                    break;
+                case Action.Butching:
+                    ButchUp();
+                    break;
+                default:
+                    throw new ArgumentException("Invalid Action argument.");
+            }
+        }
+
 
     }
 }

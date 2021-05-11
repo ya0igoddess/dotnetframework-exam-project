@@ -58,6 +58,14 @@ namespace FarmModel
             animals.Add(animal);
                 
         }
+
+        public void PerformActionToAnimals(Action performableAction, IList<Animal> animals)
+        {
+            foreach(var animal in animals)
+            {
+                animal.PerformAction(performableAction);
+            }    
+        }
         
     }
 }
