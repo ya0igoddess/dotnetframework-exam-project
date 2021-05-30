@@ -2,39 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;   
+using System.ComponentModel;
 
 namespace FarmModel
 {
     public enum AnimalsKinds { Cow, Hen, Sheep, Goat, All };
     public enum AnimalSex { Male, Female };
     public enum Action {Milking, Egg_Collecting, Sheering, Butching, Feed };
+
     public class Farm
     {
-        List<Animal> animals = new List<Animal>();
-        
+        private List<Animal> animalsList = new List<Animal>();
+
 
         public IEnumerable<Animal> GetFilteredAnimals(AnimalsKinds filter)
         {
-            if (filter == AnimalsKinds.All)
-                return animals;
-            else
-                return from animal in animals
+                return from animal in animalsList
                        where animal.AnimalKind == filter
                        select animal;
         }
 
-        public void addAnimal(Animal animal)
-        {
-            
-
-            animals.Add(animal);
-        }
-
-        public void addAnimal(AnimalsKinds kind, AnimalSex sex, 
+ 
+        public void AddAnimal(AnimalsKinds kind, AnimalSex sex, 
                                 int age, int weight)
         {
-            Animal animal = null;
+            Animal animal;
 
             switch(kind)
             {
@@ -50,21 +42,32 @@ namespace FarmModel
                 case AnimalsKinds.Sheep:
                     animal = new Sheep(sex, age, weight);
                     break;
+
+                default:
+                    throw new Exception("List view must specify kind of animal.");
             }
 
-            if (null == animal)
-                throw new Exception("List view must specify kind of animal.");
-
-            animals.Add(animal);
-                
+            animalsList.Add(animal);
         }
 
-        public void PerformActionToAnimals(Action performableAction, IList<Animal> animals)
+        /// <summary>
+        /// Performs selected action to some group of animals.
+        /// </summary>
+        /// <param name="performableAction">Selected action to perform.</param>
+        /// <param name="selectedAnimals">List of animals to perform action.</param>
+        public void PerformActionToAnimals(Action performableAction, IEnumerable<Animal> selectedAnimals)
         {
-            foreach(var animal in animals)
+
+            foreach (var animal in selectedAnimals)
             {
                 animal.PerformAction(performableAction);
-            }    
+            }
+
+            if (Action.Butching == performableAction) //butched animals must be deleted from the list
+            {
+                foreach (var animal in selectedAnimals)
+                    animalsList.Remove(animal);
+            }
         }
         
     }

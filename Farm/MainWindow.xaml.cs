@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FarmModel;
 
 namespace FarmView
 {
@@ -27,7 +28,7 @@ namespace FarmView
             InitializeComponent();
 
             farm = new FarmModel.Farm();
-            AnimalListView.ItemsSource = farm.GetFilteredAnimals(FarmModel.AnimalsKinds.All);
+            AnimalListView.ItemsSource = farm.GetFilteredAnimals(AnimalsKinds.All);
         }
 
         private void ChooseAnimaInListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -40,7 +41,7 @@ namespace FarmView
         {
             try
             {
-                farm.addAnimal((FarmModel.AnimalsKinds)AnimalViewCB.SelectedItem,
+                farm.AddAnimal((FarmModel.AnimalsKinds)AnimalViewCB.SelectedItem,
                                (FarmModel.AnimalSex)CustomAnimalSexCB.SelectedItem,
                                 int.Parse(CustomAnimalAgeCB.Text),
                                 int.Parse(CustomAnimalWeightTB.Text));
@@ -53,13 +54,14 @@ namespace FarmView
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            farm = new FarmModel.Farm();
+            //creates empty farm
+            farm = new Farm();
         }
 
         private void PerformActionButton_Click(object sender, RoutedEventArgs e)
         {
             farm.PerformActionToAnimals((FarmModel.Action)ChooseActionComboBox.SelectedItem,
-                                        AnimalListView.SelectedItems);
+                                        AnimalListView.SelectedItems.Cast<Animal>());
         }
-    }
+    }   
 }
