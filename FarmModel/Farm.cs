@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using FilterableList;
 
 namespace FarmModel
 {
@@ -12,17 +13,12 @@ namespace FarmModel
 
     public class Farm
     {
-        private List<Animal> animalsList = new List<Animal>();
+       public FilterableList<Animal>animalsList = new FilterableList<Animal>();
+       // public FilterableList<Animal> AnimalsList
+       // {
+         //   get;
+        //}
 
-
-        public IEnumerable<Animal> GetFilteredAnimals(AnimalsKinds filter)
-        {
-                return from animal in animalsList
-                       where animal.AnimalKind == filter
-                       select animal;
-        }
-
- 
         public void AddAnimal(AnimalsKinds kind, AnimalSex sex, 
                                 int age, int weight)
         {
@@ -50,6 +46,18 @@ namespace FarmModel
             animalsList.Add(animal);
         }
 
+        public void SetFilterToAnimalsList(AnimalsKinds kinds)
+        {
+            if (AnimalsKinds.All == kinds)
+            {
+                animalsList.FilterFunction = t => true;
+            }
+            else
+            {
+                animalsList.FilterFunction = t => kinds == t.AnimalKind;
+            }
+        }
+
         /// <summary>
         /// Performs selected action to some group of animals.
         /// </summary>
@@ -57,15 +65,14 @@ namespace FarmModel
         /// <param name="selectedAnimals">List of animals to perform action.</param>
         public void PerformActionToAnimals(Action performableAction, IEnumerable<Animal> selectedAnimals)
         {
-
-            foreach (var animal in selectedAnimals)
+            foreach(Animal animal in selectedAnimals)
             {
                 animal.PerformAction(performableAction);
             }
-
-            if (Action.Butching == performableAction) //butched animals must be deleted from the list
+            
+            if (performableAction==Action.Butching)
             {
-                foreach (var animal in selectedAnimals)
+                foreach (Animal animal in selectedAnimals.ToArray())
                     animalsList.Remove(animal);
             }
         }

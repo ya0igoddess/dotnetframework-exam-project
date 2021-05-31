@@ -100,6 +100,10 @@
       <Project>{b55ca7ae-511c-4d5e-9fc4-14f4189bcd14}</Project>
       <Name>FarmModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FilteredList\FilterableList.csproj">
+      <Project>{7D4F878F-03CD-4322-9CF0-EC7866155A7F}</Project>
+      <Name>FilterableList</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

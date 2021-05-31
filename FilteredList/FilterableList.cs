@@ -13,7 +13,7 @@ namespace FilterableList
     /// Enumerates all elements in list by default.
     /// </summary>
     /// <typeparam name="TItem">The type of objects in list</typeparam>
-    class FilterableList<TItem> : IList<TItem>, INotifyCollectionChanged
+    public class FilterableList<TItem> : IList<TItem>, INotifyCollectionChanged
     {
         private IList<TItem> filterableList;
         private Func<TItem, bool> filterFunc;
@@ -30,7 +30,7 @@ namespace FilterableList
             {
                 filterFunc = value;
                 CollectionChanged?.Invoke(this,
-                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
@@ -56,8 +56,8 @@ namespace FilterableList
         public void Add(TItem item)
         {
             filterableList.Add(item);
-            CollectionChanged.Invoke(this,
-                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
+            CollectionChanged?.Invoke(this,
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public void Clear()
@@ -93,21 +93,22 @@ namespace FilterableList
         {
             filterableList.Insert(index, item);
             CollectionChanged?.Invoke(this,
-                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public bool Remove(TItem item)
         {
+            bool ans = filterableList.Remove(item);
             CollectionChanged?.Invoke(this,
-                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
-            return filterableList.Remove(item);
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            return ans;
         }
 
         public void RemoveAt(int index)
         {
-            CollectionChanged?.Invoke(this,
-                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
             filterableList.RemoveAt(index);
+            CollectionChanged?.Invoke(this,
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         IEnumerator IEnumerable.GetEnumerator()

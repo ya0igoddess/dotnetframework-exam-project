@@ -28,13 +28,12 @@ namespace FarmView
             InitializeComponent();
 
             farm = new FarmModel.Farm();
-            AnimalListView.ItemsSource = farm.GetFilteredAnimals(AnimalsKinds.All);
+            AnimalListView.ItemsSource = farm.animalsList;
         }
 
         private void ChooseAnimaInListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            AnimalListView.ItemsSource = farm.GetFilteredAnimals(
-                                         (FarmModel.AnimalsKinds)AnimalViewCB.SelectedItem);
+            farm.SetFilterToAnimalsList((AnimalsKinds)AnimalViewCB.SelectedItem);
         }
 
         private void AddCustomAnimalButton_Click(object sender, RoutedEventArgs e)
@@ -46,9 +45,12 @@ namespace FarmView
                                 int.Parse(CustomAnimalAgeCB.Text),
                                 int.Parse(CustomAnimalWeightTB.Text));
             }
-            catch(Exception)
+            catch(Exception ex)    
             {
-                //TODO add ExceptionHandler
+                MessageBox.Show(ex.Message, "Error", 
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                    );
             }
         }
 
@@ -60,8 +62,18 @@ namespace FarmView
 
         private void PerformActionButton_Click(object sender, RoutedEventArgs e)
         {
-            farm.PerformActionToAnimals((FarmModel.Action)ChooseActionComboBox.SelectedItem,
-                                        AnimalListView.SelectedItems.Cast<Animal>());
+            try
+            {
+                farm.PerformActionToAnimals((FarmModel.Action)ChooseActionComboBox.SelectedItem,
+                                            AnimalListView.SelectedItems.Cast<Animal>());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                    );
+            }
         }
     }   
 }
