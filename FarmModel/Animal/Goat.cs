@@ -10,6 +10,7 @@ namespace FarmModel
     {
         public Goat(AnimalSex sex, int age, double weight) : base(sex,age,weight)
         {
+            growCoefficient = 1.05;
             this.AnimalKind = AnimalsKinds.Goat;
 
             if (sex == AnimalSex.Female)

@@ -23,7 +23,7 @@ namespace FarmModel
 
         public AnimalSex Sex { get; private set; }
         public AnimalsKinds AnimalKind { get; protected set; }
-        private double growCoefficient = 1;
+        protected double growCoefficient; //the speed of gaining mass for current animal
 
         protected Actions.MilkingAction milkingAction;
         protected Actions.EggsCollectingAction eggsCollectingAction;
@@ -51,7 +51,7 @@ namespace FarmModel
         public void GrowUp()
         {
             Age++;
-            Weight = (int)(Weight * growCoefficient);
+            Weight = Weight * growCoefficient;
             milkingAction.Refresh();
             eggsCollectingAction.Refresh();
             sheeringAction.Refresh();

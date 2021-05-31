@@ -10,7 +10,7 @@ namespace FarmModel
     {
         public Sheep(AnimalSex sex, int age, double weight) : base(sex, age, weight)
         {
-
+            growCoefficient = 1.09;
             AnimalKind = AnimalsKinds.Sheep;
             milkingAction = new Actions.MilkingNoMilk();
             eggsCollectingAction = new Actions.CollectingNoEggs();
