@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B55CA7AE-511C-4D5E-9FC4-14F4189BCD14}</ProjectGuid>
+    <ProjectGuid>{7D4F878F-03CD-4322-9CF0-EC7866155A7F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FarmModel</RootNamespace>
-    <AssemblyName>FarmModel</AssemblyName>
+    <RootNamespace>FilteredList</RootNamespace>
+    <AssemblyName>FilteredList</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,23 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animal\Actions\EggsCollectingAction.cs" />
-    <Compile Include="Animal\Actions\MilkingAction.cs" />
-    <Compile Include="Animal\Actions\RefreshableAction.cs" />
-    <Compile Include="Animal\Actions\SheeringAction.cs" />
-    <Compile Include="Animal\Animal.cs" />
-    <Compile Include="Animal\Cow.cs" />
-    <Compile Include="Animal\Goat.cs" />
-    <Compile Include="Animal\Hen.cs" />
-    <Compile Include="Animal\Sheep.cs" />
-    <Compile Include="Farm.cs" />
+    <Compile Include="FilterableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FilteredList\FilterableList.csproj">
-      <Project>{7d4f878f-03cd-4322-9cf0-ec7866155a7f}</Project>
-      <Name>FilterableList</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
