@@ -8,7 +8,7 @@ namespace FarmModel
 {
     class Cow : Animal
     {
-        public Cow(AnimalSex sex, int age, int weight) : base(sex,age,weight)
+        public Cow(AnimalSex sex, int age, double weight) : base(sex,age,weight)
         {
             
             AnimalKind = AnimalsKinds.Cow;

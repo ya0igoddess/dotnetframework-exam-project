@@ -43,7 +43,7 @@ namespace FarmView
                 farm.AddAnimal((FarmModel.AnimalsKinds)AnimalViewCB.SelectedItem,
                                (FarmModel.AnimalSex)CustomAnimalSexCB.SelectedItem,
                                 int.Parse(CustomAnimalAgeCB.Text),
-                                int.Parse(CustomAnimalWeightTB.Text));
+                                double.Parse(CustomAnimalWeightTB.Text));
             }
             catch(Exception ex)    
             {

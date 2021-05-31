@@ -1,26 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace FarmModel
 {
-    public abstract class Animal
+    public abstract class Animal : INotifyPropertyChanged
     {
+        private int age;
+        public int Age
+        {
+            get { return age;}
+            private set { age = value;
+                OnPropertyChanged("Age");
+            }
+        }
+        private double weight;
+        public double Weight { 
+            get { return weight; }
+            private set { weight = value;
+                OnPropertyChanged("Weight");
+            }
+        }
 
-        public int Age { get; private set; }
-        public int Weight { get; private set; }
         public AnimalSex Sex { get; private set; }
         public AnimalsKinds AnimalKind { get; protected set; }
-        private double growCoefficient;
+        private double growCoefficient = 1;
 
         protected Actions.MilkingAction milkingAction;
         protected Actions.EggsCollectingAction eggsCollectingAction;
         protected Actions.SheeringAction sheeringAction;
-        
 
-        public Animal(AnimalSex sex, int age, int weight)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public Animal(AnimalSex sex, int age, double weight)
         {
             
             this.Sex = sex;
@@ -75,6 +86,9 @@ namespace FarmModel
             }
         }
 
-
+        private void OnPropertyChanged(String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

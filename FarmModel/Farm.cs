@@ -11,16 +11,23 @@ namespace FarmModel
     public enum AnimalSex { Male, Female };
     public enum Action {Milking, Egg_Collecting, Sheering, Butching, Feed };
 
-    public class Farm
+    public class Farm : INotifyPropertyChanged
     {
        public FilterableList<Animal>animalsList = new FilterableList<Animal>();
-       // public FilterableList<Animal> AnimalsList
-       // {
-         //   get;
-        //}
 
-        public void AddAnimal(AnimalsKinds kind, AnimalSex sex, 
-                                int age, int weight)
+        /// <summary>
+        /// Returns readonly list of animals contained in the farm.
+        /// </summary>
+         public IReadOnlyList<Animal> AnimalsList
+         {
+           get { return animalsList as IReadOnlyList<Animal>; }
+         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void AddAnimal(AnimalsKinds kind, 
+            AnimalSex sex,               
+            int age, 
+            double weight)
         {
             Animal animal;
 
@@ -44,6 +51,7 @@ namespace FarmModel
             }
 
             animalsList.Add(animal);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AnimalsList"));
         }
 
         public void SetFilterToAnimalsList(AnimalsKinds kinds)
@@ -56,6 +64,7 @@ namespace FarmModel
             {
                 animalsList.FilterFunction = t => kinds == t.AnimalKind;
             }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AnimalsList"));
         }
 
         /// <summary>
@@ -75,6 +84,7 @@ namespace FarmModel
                 foreach (Animal animal in selectedAnimals.ToArray())
                     animalsList.Remove(animal);
             }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AnimalsList"));
         }
         
     }
