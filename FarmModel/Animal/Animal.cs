@@ -48,39 +48,37 @@ namespace FarmModel
 
         }
 
-        public void GrowUp()
+        public string GrowUp()
         {
             Age++;
             Weight = Weight * growCoefficient;
             milkingAction.Refresh();
             eggsCollectingAction.Refresh();
             sheeringAction.Refresh();
+            return string.Format("You fed {0}", AnimalKind.ToString());
         }
 
-        public void ButchUp()
+        public string ButchUp()
         {
-            //TODO return meat
+            return string.Format("You butched {0} for {1} kg of meat", 
+                AnimalKind.ToString(), 
+                weight.ToString());
         }
 
-        public void PerformAction(Action action)
+        public string PerformAction(Action action)
         {
             switch (action)
             {
                 case Action.Egg_Collecting:
-                    eggsCollectingAction.PerformAction();
-                    break;
+                   return eggsCollectingAction.PerformAction();
                 case Action.Feed:
-                    GrowUp();
-                    break;
+                    return GrowUp();
                 case Action.Milking:
-                    milkingAction.PerformAction();
-                    break;
+                    return milkingAction.PerformAction();
                 case Action.Sheering:
-                    sheeringAction.PerformAction();
-                    break;
+                    return sheeringAction.PerformAction();
                 case Action.Butching:
-                    ButchUp();
-                    break;
+                   return ButchUp();
                 default:
                     throw new ArgumentException("Invalid Action argument.");
             }

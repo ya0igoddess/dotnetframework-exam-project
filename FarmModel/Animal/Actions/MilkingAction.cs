@@ -8,33 +8,33 @@ namespace FarmModel.Actions
 {
     public abstract class MilkingAction : RefreshableAction
     {
-        public void PerformMilkin()
+        public string PerformMilkin()
         {
-            PerformAction();
+           return PerformAction();
         }
     }
 
     class MilkingWithCowMilk : MilkingAction
     {
-        protected override void DoAction()
+        protected override string DoAction()
         {
-            //TODO addcowmilk
+            return "Milked some cow milk";
         }
     }
 
     class MilkingWithGoatMilk : MilkingAction
     {
-        protected override void DoAction()
+        protected override string DoAction()
         {
-            //TODO addgoatmilk
+            return "Milked some goat milk";
         }
     }
 
     class MilkingNoMilk : MilkingAction
     {
-        protected override void DoAction()
+        protected override string DoAction()
         {
-            //do nothing
+            return "Milking this animal is unable";
         }
     }
 }

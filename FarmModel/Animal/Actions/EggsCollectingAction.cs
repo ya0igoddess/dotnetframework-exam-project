@@ -8,25 +8,25 @@ namespace FarmModel.Actions
 {
     public abstract class EggsCollectingAction : RefreshableAction
     {
-        public void PerformEggsCollectin()
+        public string PerformEggsCollectin()
         {
-            PerformAction();
+            return PerformAction();
         }
     }
 
     class CollectingWithHenEggs : EggsCollectingAction
     {
-        protected override void DoAction()
+        protected override string DoAction()
         {
-            //TODO add hens eggs
+            return "Collectes some hen eggs";
         }
     }
 
     class CollectingNoEggs : EggsCollectingAction
     {
-        protected override void DoAction()
+        protected override string DoAction()
         {
-            //do nothing
+            return "Collecting eggs from this animal is unable";
         }
     }
 }

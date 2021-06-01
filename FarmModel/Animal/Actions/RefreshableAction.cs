@@ -15,15 +15,20 @@ namespace FarmModel.Actions
             isAbleToPerform = true;
         }
 
-        public void PerformAction()
+        public string PerformAction()
         {
             if (isAbleToPerform)
             {
-                DoAction();
+                isAbleToPerform = false;
+                return DoAction();
             }
-            isAbleToPerform = false;
+            return "Action can\'t be done";
         }
 
-        protected abstract void DoAction();
+        /// <summary>
+        /// An action that could be done
+        /// </summary>
+        /// <returns>Text result of action</returns>
+        protected abstract string DoAction();
     }
 }

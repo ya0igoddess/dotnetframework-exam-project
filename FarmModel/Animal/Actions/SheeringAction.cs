@@ -8,25 +8,25 @@ namespace FarmModel.Actions
 {
     public abstract class SheeringAction : RefreshableAction
     {
-        public void PerformSheering()
+        public string PerformSheering()
         {
-            PerformAction();
+           return PerformAction();
         }
     }
 
     class SheeringWithSheepWool : SheeringAction
     {
-        protected override void DoAction()
+        protected override string DoAction()
         {
-            //TODO add sheep wool
+            return "Sheered some sheep wool";
         }
     }
 
     class SheeringNoWool : SheeringAction
     {
-        protected override void DoAction()
+        protected override string DoAction()
         {
-            //do nothing
+            return "Sheering this animal is unable";
         }
     }
 }

@@ -70,13 +70,15 @@ namespace FarmModel
         /// <summary>
         /// Performs selected action to some group of animals.
         /// </summary>
-        /// <param name="performableAction">Selected action to perform.</param>
-        /// <param name="selectedAnimals">List of animals to perform action.</param>
-        public void PerformActionToAnimals(Action performableAction, IEnumerable<Animal> selectedAnimals)
+        /// <param name="performableAction">Selected action to perform</param>
+        /// <param name="selectedAnimals">List of animals to perform action</param>
+        /// <returns>Collection of strings, describing </returns>
+        public ICollection<string> PerformActionToAnimals(Action performableAction, IEnumerable<Animal> selectedAnimals)
         {
+            List<string> resultLog = new List<string>();
             foreach(Animal animal in selectedAnimals)
             {
-                animal.PerformAction(performableAction);
+               resultLog.Add(animal.PerformAction(performableAction));
             }
             
             if (performableAction==Action.Butching)
@@ -85,6 +87,7 @@ namespace FarmModel
                     animalsList.Remove(animal);
             }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AnimalsList"));
+            return resultLog;
         }
         
     }
