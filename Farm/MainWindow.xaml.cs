@@ -23,7 +23,8 @@ namespace FarmView
 
             farm = new FarmModel.Farm();
             actionLog = new ObservableCollection<string>();
-            AnimalListView.ItemsSource = farm.AnimalsList;
+            ActionLogListBox.ItemsSource = actionLog;
+            UpdateFarmBinding();
         }
 
         private void ChooseAnimaInListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -124,6 +125,7 @@ namespace FarmView
                                     MessageBoxImage.Error);
                 }
             }
+            UpdateFarmBinding();
         }
 
         private void UpdateFarmBinding()
