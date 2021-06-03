@@ -115,5 +115,10 @@ namespace FilterableList
         {
             return (IEnumerator)GetEnumerator();
         }
+
+        public IEnumerable<TItem> GetAll()
+        {
+            return filterableList;
+        }
     }
 }

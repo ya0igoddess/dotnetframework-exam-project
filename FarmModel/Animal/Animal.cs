@@ -69,7 +69,7 @@ namespace FarmModel
         {
             switch (action)
             {
-                case Action.Egg_Collecting:
+                case Action.Eggs_Collecting:
                    return eggsCollectingAction.PerformAction();
                 case Action.Feed:
                     return GrowUp();
@@ -87,6 +87,15 @@ namespace FarmModel
         private void OnPropertyChanged(String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2} {3}",
+                                AnimalKind.ToString(),
+                                Sex.ToString(),
+                                Age.ToString(),
+                                Weight.ToString());
         }
     }
 }

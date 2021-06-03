@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using FilterableList;
+using System.IO;
 
 namespace FarmModel
 {
     public enum AnimalsKinds { Cow, Hen, Sheep, Goat, All };
     public enum AnimalSex { Male, Female };
-    public enum Action {Milking, Egg_Collecting, Sheering, Butching, Feed };
+    public enum Action {Milking, Eggs_Collecting, Sheering, Butching, Feed };
 
     public class Farm : INotifyPropertyChanged
     {
-       public FilterableList<Animal>animalsList = new FilterableList<Animal>();
+       private FilterableList<Animal>animalsList = new FilterableList<Animal>();
 
         /// <summary>
         /// Returns readonly list of animals contained in the farm.
         /// </summary>
-         public IReadOnlyList<Animal> AnimalsList
+         public IList<Animal> AnimalsList
          {
-           get { return animalsList as IReadOnlyList<Animal>; }
+           get { return animalsList; }
          }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -89,6 +90,39 @@ namespace FarmModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AnimalsList"));
             return resultLog;
         }
-        
+
+        public void SaveFarmToFile(string fileName)
+        {
+            if (File.Exists(fileName)) File.Delete(fileName);
+
+            using (FileStream fs = File.Create(fileName))
+            {
+                foreach (Animal animal in animalsList.GetAll())
+                {
+                    byte[] convertedStr = UTF8Encoding.UTF8.GetBytes(animal.ToString() + '\n');
+                    fs.Write(convertedStr, 0, convertedStr.Length);    
+                }
+            }
+        }
+
+        public Farm LoadNewFarm(string fileName)
+        {
+            Farm result = new Farm();
+            string[] lines = File.ReadAllLines(fileName);
+            foreach (string line in lines)
+            {
+                string[] args = line.Split(' ');
+                if (args.Length != 4)
+                {
+                    throw new ArgumentException("Invalid animal record in file");
+                }
+
+                result.AddAnimal((AnimalsKinds)Enum.Parse(typeof(AnimalsKinds),args[0]),
+                                 (AnimalSex)Enum.Parse(typeof(AnimalSex),args[1]),
+                                  int.Parse(args[2]),
+                                  double.Parse(args[3]));
+            }
+            return result;
+        }
     }
 }

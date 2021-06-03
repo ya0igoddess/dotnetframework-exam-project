@@ -64,8 +64,8 @@
 
         </Grid>
         <Menu x:Name="menuBar" VerticalAlignment="Top">
-            <MenuItem Header="Open"/>
-            <MenuItem Header="Save"/>
+            <MenuItem Header="Open" Click="MenuItem_Click_2"/>
+            <MenuItem Header="Save" Click="MenuItem_Click_1"/>
             <MenuItem Header="New" Click="MenuItem_Click"/>
         </Menu>
         <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="248" Margin="454,161,0,0" VerticalAlignment="Top" Width="328">
