@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using FilterableList;
 using System.IO;
+using System.Globalization;
 
 namespace FarmModel
 {
@@ -97,9 +98,11 @@ namespace FarmModel
 
             using (FileStream fs = File.Create(fileName))
             {
+                CultureInfo culture = CultureInfo.InvariantCulture;
+
                 foreach (Animal animal in animalsList.GetAll())
                 {
-                    byte[] convertedStr = UTF8Encoding.UTF8.GetBytes(animal.ToString() + '\n');
+                    byte[] convertedStr = UTF8Encoding.UTF8.GetBytes(animal.ToString() + '\n'); ;
                     fs.Write(convertedStr, 0, convertedStr.Length);    
                 }
             }
@@ -111,6 +114,8 @@ namespace FarmModel
             string[] lines = File.ReadAllLines(fileName);
             foreach (string line in lines)
             {
+                CultureInfo culture = CultureInfo.InvariantCulture;
+
                 string[] args = line.Split(' ');
                 if (args.Length != 4)
                 {
@@ -120,7 +125,7 @@ namespace FarmModel
                 result.AddAnimal((AnimalsKinds)Enum.Parse(typeof(AnimalsKinds),args[0]),
                                  (AnimalSex)Enum.Parse(typeof(AnimalSex),args[1]),
                                   int.Parse(args[2]),
-                                  double.Parse(args[3]));
+                                  double.Parse(args[3],culture));
             }
             return result;
         }

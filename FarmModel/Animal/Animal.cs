@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.ComponentModel;
 
 namespace FarmModel
@@ -95,7 +96,7 @@ namespace FarmModel
                                 AnimalKind.ToString(),
                                 Sex.ToString(),
                                 Age.ToString(),
-                                Weight.ToString());
+                                Weight.ToString(CultureInfo.InvariantCulture));
         }
     }
 }
